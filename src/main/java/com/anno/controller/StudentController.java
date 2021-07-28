@@ -30,7 +30,7 @@ public class StudentController {
         return modelAndView;
     }
 
-    //接收参数
+    //===================接收参数=====================
 
     /**
      * 名字一致
@@ -92,7 +92,7 @@ public class StudentController {
         return "/test";
     }
 
-    //返回参数
+    //===================返回参数=====================
     /**
      * 返回ModelAndView，参考test01()
      * 只针对同步
@@ -125,4 +125,36 @@ public class StudentController {
         map.put("school", "Purdue");
         return map;
     }
+
+    //===================页面跳转=====================
+
+    /**
+     * 重定向redirect
+     */
+    @RequestMapping("/insertStudent")
+    public String insertStudent(Model model){
+        model.addAttribute("operation","insert");
+        model.addAttribute("status","200");
+        return "redirect:/student/checkStatus";
+    }
+
+    /**
+     * 转发forward
+     */
+    @RequestMapping("/updateStudent")
+    public String deleteStudent(Model model){
+        model.addAttribute("operation","update");
+        model.addAttribute("status","404");
+        return "forward:/student/checkStatus";
+    }
+
+    /**
+     * forward和redirect到同一个destination URL
+     */
+    @RequestMapping("/checkStatus")
+    public String checkStatus(Model model){
+        model.addAttribute("message","destination page");
+        return "/destination";
+    }
+
 }
