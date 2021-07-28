@@ -2,10 +2,13 @@ package com.anno.controller;
 
 import com.anno.pojo.Student;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,7 +23,7 @@ import java.util.Map;
 public class StudentController {
 
     @RequestMapping("/fetchStudent")
-    public ModelAndView test01(){
+    public ModelAndView returnParam01(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("message","test for annotation springmvc");
         modelAndView.setViewName("/test");
@@ -87,5 +90,39 @@ public class StudentController {
         System.out.println(student.getUsername());
         System.out.println(student.getPassword());
         return "/test";
+    }
+
+    //返回参数
+    /**
+     * 返回ModelAndView，参考test01()
+     * 只针对同步
+     */
+
+    /**
+     * 返回String字符串(View)
+     * 接收Model参数,调用setModel，并返回model参数
+     * 只针对同步
+     * @param model
+     * @return
+     */
+    @RequestMapping("/returnParam02")
+    public String returnParam02(Model model){
+        model.addAttribute("message","return model parameter");
+        return "/test";
+    }
+
+    /**
+     * 以json的形式返回任何数据类型
+     * 需要使用@ResponseBody，并且需要导入系统自动转换为json的jar包
+     * @return
+     */
+    @RequestMapping("/returnJson")
+    @ResponseBody
+    public Map returnJson(){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", "Di Guan");
+        map.put("age", 26);
+        map.put("school", "Purdue");
+        return map;
     }
 }
