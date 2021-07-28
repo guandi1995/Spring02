@@ -4,16 +4,34 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-<!--  配置DispatcherServlet，所有的请求都被DispatcherServlet拦截-->
-<!--  拦截后DispatcherServlet先去找HandlerMapping进行解析路径-->
-<!--  所以需要配置HandlerMapping到bean中进行加载-->
-<!--  DispatcherServlet默认去servletName-serlvet.xml文件中寻找-->
+
+  <!--            纯xml配置解析(走默认springMVC-servlet.xml文件)          -->
+  <!--  配置DispatcherServlet，所有的请求都被DispatcherServlet拦截-->
+  <!--  拦截后DispatcherServlet先去找HandlerMapping进行解析路径-->
+  <!--  所以需要配置HandlerMapping到bean中进行加载-->
+  <!--  DispatcherServlet默认去/WEB-INF/servletName-serlvet.xml(springMVC-servlet.xml)文件中寻找-->
+<!--  <servlet>-->
+<!--    <servlet-name>springMVC</servlet-name>-->
+<!--    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+<!--  </servlet>-->
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>springMVC</servlet-name>-->
+<!--    <url-pattern>/</url-pattern>-->
+<!--  </servlet-mapping>-->
+
+<!--          注解配置解析(不走默认文件，声明classpath)
+        一般放在resource下，不放在默认路径/WEB-INF/路径下-->
   <servlet>
     <servlet-name>springMVC</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:springMVC.xml</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>springMVC</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
 </web-app>
