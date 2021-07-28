@@ -4,4 +4,16 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+<!--  配置DispatcherServlet，所有的请求都被DispatcherServlet拦截-->
+<!--  拦截后DispatcherServlet先去找HandlerMapping进行解析路径-->
+<!--  所以需要配置HandlerMapping到bean中进行加载-->
+<!--  DispatcherServlet默认去servletName-serlvet.xml文件中寻找-->
+  <servlet>
+    <servlet-name>springMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>springMVC</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
 </web-app>
